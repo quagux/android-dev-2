@@ -97,19 +97,19 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 
 ## GitHub Project Board  
 
-![Project Board Screenshot](YOUR_WIREFRAME_IMAGE_URL)  
+![Project Board Screenshot](image.png)  
 
 ## Issue Cards  
 
-- ![Current Issues Screenshot](YOUR_WIREFRAME_IMAGE_URL)  
-- ![Next Sprint Issues Screenshot](YOUR_WIREFRAME_IMAGE_URL)  
+- ![Current Issues Screenshot](image.png)  
+- ![Next Sprint Issues Screenshot](image.png)  
 
 ## Issues Worked On This Sprint  
 
 - Listed issues:  
   1. Initial setup of app syncing with Pokémon GO.  
   2. Basic Pokémon storage display.  
-  3. Item inventory prototype.  
+  3. Current event landing page.  
 
 - GIF showing build progress:  
 ![Build Progress GIF](YOUR_WIREFRAME_IMAGE_URL)  
@@ -126,8 +126,8 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 
 - List of completed stories:  
   1. Fully functional Pokémon storage sync and sorting.  
-  2. Item inventory management with alerts.  
-  3. Initial battle team planning tools.  
+  2. Pokemon detail screen.  
+  3. Initial search string.  
 
 - List of pending or cut features:  
   - Raid coordination tools moved to V3 scope.  
