@@ -97,20 +97,19 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 
 ## GitHub Project Board  
 
-![Project Board Screenshot](YOUR_WIREFRAME_IMAGE_URL)  
+![Project Board Screenshot](image.png)  
 
 ## Issue Cards  
 
-- ![Current Issues Screenshot](YOUR_WIREFRAME_IMAGE_URL)  
-- ![Next Sprint Issues Screenshot](YOUR_WIREFRAME_IMAGE_URL)  
+- ![Current Issues Screenshot](image.png)  
+- ![Next Sprint Issues Screenshot](image.png)  
 
 ## Issues Worked On This Sprint  
 
 - Listed issues:  
-  1. View and sort Pokémon by CP, type, stats, or other criteria.  
-  2. Search string generation for important Pokémon.
-  3. Event overview and planning dashboard.  
-  
+  1. Basic Pokémon storage display.  
+  2. Integration with camera for Pokémon tracking.
+  3. Current event landing page.  
 
 - GIF showing build progress:  
 ![Build Progress GIF](YOUR_WIREFRAME_IMAGE_URL)  
@@ -128,7 +127,8 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 - List of completed stories:  
   1. Export collection data for advanced statistical analysis.  
   2. Notifications for synced events, including upcoming raids or tasks.  
-  3. Integration with camera for Pokémon tracking.  
+  3. Pokemon detail screen.
+    
 - Video/GIF of current application:  
 ![App Demo GIF](YOUR_WIREFRAME_IMAGE_URL)  
 
