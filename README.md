@@ -31,32 +31,35 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 ### 1. User Features (Required and Optional)  
 
 **Required Features**  
-1. View and sort Pokémon by CP, type, stats, or other criteria.  
-2. Search string generation for important Pokémon.
-3. Event overview and planning dashboard.  
+1. View and sort owned Pokémon by CP, type, stats, or other criteria.  
+2. Input page for owned Pokémon.
+3. Event overview and list of all Pokémon.  
 
 **Optional Features**  
-1. Export collection data for advanced statistical analysis.  
+1. Export collection data.  
 2. Notifications for synced events, including upcoming raids or tasks.  
-3. Integration with camera for Pokémon tracking.  
+3. Integration with GPS for logging when inputting Pokémon.
+4. Pokemon detail page.
 
 ---
 
 ### 2. Screen Archetypes  
 
 - **Home Dashboard**  
-  - Display an overview of current event and Pokémon to focus on during event.  
+  - Display an overview of current event and all Pokémon.  
 
 - **Pokémon Storage Screen**  
-  - View, sort, and manage Pokémon with filters for type, CP, IV, and more.  
-  - Access search string tools directly from this screen.  
+  - View, sort, and manage Pokémon with filters for type, CP, more.  
+  - Access all other screens via nav bar.  
 
-- **Search String Generator**  
-  - Create and save search strings for gym battles, raids, and PvP.  
-  - Toggle certain parameters to generate search string such as PVE, PVP, and ranking.  
+- **Insert Pokémon**  
+  - Create and save Pokémon for personal colletion.  
+  - Toggle parameter to allow GPS tracking for to tag Pokémon with location.  
+  - Access all other screens via nav bar.
 
-- **Input Pokémon Screen** (Optional for V3)  
-  - Using camera/screenshot insert Pokémon into collection.    
+- **Pokémon Details**
+  - View more Pokémon information
+  - Accesible by clicking on Pokémon in both personal collection and home screen  
 
 ---
 
@@ -64,19 +67,19 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 
 **Tab Navigation** (Tab to Screen)  
 - **Dashboard:** Overview of current event and notifications.  
-- **Storage:** Pokémon management tools.  
-- **Search String:** Search string generation.  
-- **Input Pokémon Screen:** Using screenshot/camera insert Pokémon.  
+- **Storage:** Pokémon collection.  
+- **Input Pokémon Screen:** Insert Pokémon.  
+- **Pokémon Detail Screen:** View more information about Pokémon.  
 
 **Flow Navigation** (Screen to Screen)  
 - Dashboard  
-  - Navigate to Storage, Search String Generator, or Camera Input.  
+  - Navigate to Storage, Input, or Details.  
 - Storage  
-  - Filter and view details.  
-- Search String Generator  
-  - Generate string and navigate back to the Dashboard.  
-- Camera Input  
-  - Save a Pokémon.  
+  - Navigate details or input.  
+- Input  
+  - Save a Pokémon.
+- Detail
+  - Details of a Pokémon.
 
 ---
 
@@ -84,12 +87,6 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 
 ![alt text](page1.jpg)
 ![alt text](page2.jpg)
-
-
----
-
-### [BONUS] Digital Wireframes & Mockups  
-### [BONUS] Interactive Prototype  
 
 ---
 
@@ -110,11 +107,10 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
   - Initial setup
   - Firebase setup and integration
   1. Basic Pokémon storage display.  
-  2. Integration with camera for Pokémon tracking.
-  3. Current event landing page.  
+  2. Current event landing page.  
 
 - GIF showing build progress:  
-![Build Progress GIF](YOUR_WIREFRAME_IMAGE_URL)  
+![Build Progress GIF](Animation.gif)  
 
 ---
 
@@ -127,9 +123,7 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 ## Completed User Stories  
 
 - List of completed stories:  
-  1. Export collection data for advanced statistical analysis.  
-  2. Notifications for synced events, including upcoming raids or tasks.  
-  3. Pokemon detail screen.
+  
     
 - Video/GIF of current application:  
 ![App Demo GIF](YOUR_WIREFRAME_IMAGE_URL)  
