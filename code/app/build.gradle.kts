@@ -55,5 +55,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-database")
-
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.google.code.gson:gson:2.10.1")
 }
