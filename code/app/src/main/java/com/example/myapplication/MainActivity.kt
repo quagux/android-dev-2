@@ -68,7 +68,8 @@ class MainActivity : AppCompatActivity() {
 
     data class Pokemon(
         val name: String,
-        val spriteUrl: String
+        val spriteUrl: String,
+        val flavorText: String
     )
     private fun parsePokemonJson(json: String, callback: (List<Pokemon>) -> Unit){
         val pokemonList = mutableListOf<Pokemon>()
@@ -77,27 +78,34 @@ class MainActivity : AppCompatActivity() {
         var pendingRequests = jsonObject.results.size
 
         for (pokemon in jsonObject.results){
-            fetchPokemonSprite(pokemon.url) { spriteUrl ->
-                val pokemonObject = Pokemon(pokemon.name, spriteUrl)
-                pokemonList.add(pokemonObject)
-                // Decrement the counter and check if all requests are done
-                pendingRequests--
-                if (pendingRequests == 0) {
-                    // All sprites fetched, invoke the callback with the final list
-                    Log.d("Pokemon", "Final List: $pokemonList")
-                    callback(pokemonList)
+            fetchPokemonSprite(pokemon.url) { spriteUrl, speciesUrl ->
+                fetchPokemonFlavorText(speciesUrl) { flavorText ->
+                    val pokemonObject = Pokemon(pokemon.name, spriteUrl, flavorText)
+                    pokemonList.add(pokemonObject)
+                    // Decrement the counter and check if all requests are done
+                    pendingRequests--
+                    if (pendingRequests == 0) {
+                        // All sprites fetched, invoke the callback with the final list
+                        Log.d("Pokemon", "Final List: $pokemonList")
+                        callback(pokemonList)
+                    }
                 }
             }
         }
     }
 
     data class PokemonApiResponse(
-        val sprites: Sprites
+        val sprites: Sprites,
+        val species: Species
     )
     data class Sprites(
         val front_default: String
     )
-    private fun fetchPokemonSprite(url: String, callback: (String) -> Unit) {
+    data class Species(
+        val url: String
+    )
+
+    private fun fetchPokemonSprite(url: String, callback: (String, String) -> Unit) {
         val request = Request.Builder()
             .url(url)
             .build()
@@ -113,8 +121,50 @@ class MainActivity : AppCompatActivity() {
                     val gson = Gson()
                     val pokemonApiResponse  = gson.fromJson(json, PokemonApiResponse::class.java)
                     val spriteUrl = pokemonApiResponse.sprites.front_default
-                    Log.d("Pokemon", "Sprite URL: $spriteUrl")
-                    callback(spriteUrl)
+                    val speciesUrl = pokemonApiResponse.species.url
+                    //Log.d("Pokemon", "Sprite URL: $spriteUrl")
+                    //Log.d("Pokemon", "Species URL: $speciesUrl")
+                    callback(spriteUrl, speciesUrl)
+                }
+            }
+        })
+    }
+
+    data class PokemonFlavorTextResponse(
+        val flavor_text_entries: List<FlavorTextEntry>
+    )
+    data class FlavorTextEntry(
+        val flavor_text: String,
+        val language: Language,
+        val version: Version
+    )
+    data class Language(
+        val name: String,
+        val url: String
+    )
+    data class Version(
+        val name: String,
+        val url: String
+    )
+    private fun fetchPokemonFlavorText(url: String, callback: (String) -> Unit) {
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.let { responseBody ->
+                    val json = responseBody.string()
+                    val gson = Gson()
+                    val responseSpecies  = gson.fromJson(json, PokemonFlavorTextResponse::class.java)
+                    val flavor_text_entry = responseSpecies.flavor_text_entries.first { it.language.name == "en" }
+                    val flavor_text = flavor_text_entry.flavor_text
+                    //Log.d("Pokemon", "Flavor text: $flavor_text")
+                    callback(flavor_text)
                 }
             }
         })
