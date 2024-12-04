@@ -1,11 +1,13 @@
 package com.example.myapplication
 
 import PokemonAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 //import com.google.firebase.referencecode.database.R
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,8 +32,37 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         fetchPokemonData()
+
+        // Reference to the BottomNavigationView
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.selectedItemId = R.id.nav_home
+
+        // Set up navigation logic
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    // Navigate to Home
+                    startActivity(Intent(this, MainActivity::class.java))
+                    true
+                }
+                R.id.nav_input_form -> {
+                    // Navigate to Input Form
+                    startActivity(Intent(this, InputFormActivity::class.java))
+                    true
+                }
+                R.id.nav_collection -> {
+                    // Navigate to Collection
+                    startActivity(Intent(this, CollectionActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
+    object SharedData {
+        var pokemonList: List<Pokemon>? = null
+    }
     private fun fetchPokemonData() {
         val url = "https://pokeapi.co/api/v2/pokemon?limit=50"
 
@@ -52,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                         runOnUiThread {
                             recyclerView.adapter = PokemonAdapter(pokemonList)
                         }
+                        SharedData.pokemonList = pokemonList
                     }
                 }
             }
@@ -86,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                     pendingRequests--
                     if (pendingRequests == 0) {
                         // All sprites fetched, invoke the callback with the final list
-                        Log.d("Pokemon", "Final List: $pokemonList")
+                        //Log.d("Pokemon", "Final List: $pokemonList")
                         callback(pokemonList)
                     }
                 }
@@ -168,11 +200,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    fun basicReadWrite() {
-        val db = FirebaseFirestore.getInstance()
-        val myCollectionRef = db.collection("/test")
-        myCollectionRef.add(mapOf("field1" to "value1", "field2" to "value2"))
     }
 }
