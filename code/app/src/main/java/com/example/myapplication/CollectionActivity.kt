@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,9 +29,30 @@ class CollectionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_collection)
         recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         searchEditText = findViewById<EditText>(R.id.searchEditText)
-
         documentList = ArrayList()
-        adapter = DocumentAdapter(this, documentList as ArrayList<DocumentModel>)
+        adapter = DocumentAdapter(
+            this,
+            documentList as ArrayList<DocumentModel>,
+            onDelete = { document ->
+                // Delete document from Firestore
+                FirebaseFirestore.getInstance().collection("collection")
+                    .whereEqualTo("name", document.name)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        for (doc in querySnapshot.documents) {
+                            doc.reference.delete()
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Item deleted successfully", Toast.LENGTH_SHORT).show()
+                                    fetchDocuments() // Refresh the list
+                                }
+                        }
+                    }
+            },
+            onUpdate = { document ->
+                // Show a dialog or activity to update the document
+                showUpdateDialog(document)
+            }
+        )
         recyclerView.setLayoutManager(LinearLayoutManager(this))
         recyclerView.setAdapter(adapter)
 
@@ -75,6 +99,46 @@ class CollectionActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun showUpdateDialog(document: DocumentModel) {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_update_document, null)
+        val nameEditText = dialogView.findViewById<EditText>(R.id.editTextName)
+        val levelEditText = dialogView.findViewById<EditText>(R.id.editTextLevel)
+        val locationEditText = dialogView.findViewById<EditText>(R.id.editTextLocation)
+
+        // Pre-fill the fields with the current values
+        nameEditText.setText(document.name)
+        levelEditText.setText(document.level)
+        locationEditText.setText(document.location)
+
+        AlertDialog.Builder(this)
+            .setTitle("Update Document")
+            .setView(dialogView)
+            .setPositiveButton("Update") { _, _ ->
+                val updatedDocument = DocumentModel(
+                    nameEditText.text.toString(),
+                    levelEditText.text.toString(),
+                    locationEditText.text.toString()
+                )
+
+                // Update Firestore
+                FirebaseFirestore.getInstance().collection("collection")
+                    .whereEqualTo("name", document.name)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        for (doc in querySnapshot.documents) {
+                            doc.reference.set(updatedDocument)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Item updated successfully", Toast.LENGTH_SHORT).show()
+                                    fetchDocuments() // Refresh the list
+                                }
+                        }
+                    }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
 
     private fun fetchDocuments() {
         firestore!!.collection("collection")

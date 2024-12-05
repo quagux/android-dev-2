@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,40 +10,54 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 
 
-class DocumentAdapter(context: Context, documentList: List<DocumentModel>) :
-    RecyclerView.Adapter<DocumentAdapter.DocumentViewHolder>() {
-    private var documentList: List<DocumentModel>
-    private val context: Context = context
+class DocumentAdapter(
+    private val context: Context,
+    private var documentList: List<DocumentModel>,
+    private val onDelete: (DocumentModel) -> Unit,
+    private val onUpdate: (DocumentModel) -> Unit
+) : RecyclerView.Adapter<DocumentAdapter.DocumentViewHolder>() {
 
-    init {
-        this.documentList = documentList
-    }
-
-    @NonNull
-    override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int): DocumentViewHolder {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.item_document, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DocumentViewHolder {
+        val view = LayoutInflater.from(context).inflate(R.layout.item_document, parent, false)
         return DocumentViewHolder(view)
     }
 
-    override fun onBindViewHolder(@NonNull holder: DocumentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DocumentViewHolder, position: Int) {
         val document = documentList[position]
         holder.nameTextView.text = document.name
         holder.levelTextView.text = document.level
         holder.locationTextView.text = document.location
+
+        // Set long press listener
+        holder.itemView.setOnLongClickListener {
+            showOptionsDialog(document)
+            true
+        }
     }
 
-    override fun getItemCount(): Int {
-        return documentList.size
-    }
+    override fun getItemCount(): Int = documentList.size
 
     fun updateList(newList: List<DocumentModel>) {
         documentList = newList
         notifyDataSetChanged()
     }
 
-    class DocumentViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-        var levelTextView: TextView = itemView.findViewById(R.id.levelTextView)
-        var locationTextView: TextView = itemView.findViewById(R.id.locationTextView)
+    private fun showOptionsDialog(document: DocumentModel) {
+        val options = arrayOf("Update", "Delete")
+        AlertDialog.Builder(context)
+            .setTitle("Choose an action")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> onUpdate(document) // Update action
+                    1 -> onDelete(document) // Delete action
+                }
+            }
+            .show()
+    }
+
+    class DocumentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
+        val levelTextView: TextView = itemView.findViewById(R.id.levelTextView)
+        val locationTextView: TextView = itemView.findViewById(R.id.locationTextView)
     }
 }

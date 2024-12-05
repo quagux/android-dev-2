@@ -10,9 +10,9 @@ class DocumentModel() { // No-argument constructor
         private set
 
     // Secondary constructor (optional for manual instantiation)
-    constructor(level: String?, location: String?, name: String?) : this() {
+    constructor(name: String?, level: String?, location: String?) : this() {
+        this.name = name
         this.level = level
         this.location = location
-        this.name = name
     }
 }
