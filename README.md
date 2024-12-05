@@ -1,3 +1,5 @@
+ ([CLASS REQUIRMENTS](requirements.md ))
+
 # Milestone 1 - Pokémon GO PC Manager (Unit 7)  
 
 ## Table of Contents  
@@ -31,7 +33,7 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 ### 1. User Features (Required and Optional)  
 
 **Required Features**  
-1. View and sort owned Pokémon by CP, type, stats, or other criteria.  
+1. View and sort owned Pokémon by CP, level, and name.  
 2. Input page for owned Pokémon.
 3. Event overview and list of all Pokémon.  
 
@@ -99,7 +101,6 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 ## Issue Cards  
 
 - ![Current Issues Screenshot](image.png)  
-- ![Next Sprint Issues Screenshot](image.png)  
 
 ## Issues Worked On This Sprint  
 
@@ -118,15 +119,23 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 
 ## GitHub Project Board  
 
-![Updated Project Board Screenshot](YOUR_WIREFRAME_IMAGE_URL)  
+![Updated Project Board Screenshot](boardUpdate.png)  
 
 ## Completed User Stories  
 
 - List of completed stories:  
-  
+**Required Features**  
+1. View and sort owned Pokémon by CP, level, and name.  
+2. Input page for owned Pokémon.
+3. Event overview and list of all Pokémon.  
+
+**Optional Features**  
+1. Integration with GPS for logging when inputting Pokémon.
+2. Pokemon detail page.
+
     
 - Video/GIF of current application:  
-![App Demo GIF](YOUR_WIREFRAME_IMAGE_URL)  
+![App Demo GIF](demo.gif)  
 
 ---
 
