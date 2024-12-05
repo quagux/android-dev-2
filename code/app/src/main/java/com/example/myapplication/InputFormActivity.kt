@@ -17,9 +17,7 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.common.reflect.TypeToken
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.Gson
 
 class InputFormActivity : AppCompatActivity() {
 
@@ -56,7 +54,7 @@ class InputFormActivity : AppCompatActivity() {
         fetchLocation()
 
         val db = FirebaseFirestore.getInstance()
-        val myCollectionRef = db.collection("/test")
+        val myCollectionRef = db.collection("/collection")
         // Handle Submit button click
         submitButton.setOnClickListener {
             val selectedPokemon = spinner.selectedItem.toString()
@@ -121,11 +119,5 @@ class InputFormActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Location permission required", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    fun basicReadWrite() {
-        val db = FirebaseFirestore.getInstance()
-        val myCollectionRef = db.collection("/test")
-        myCollectionRef.add(mapOf("name" to "value1", "field2" to "value2"))
     }
 }

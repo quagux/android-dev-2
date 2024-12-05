@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".InputFormActivity"
-    android:padding="16dp"> <!-- Padding for the entire layout -->
-
+   >
     <!-- Title -->
     <TextView
         android:id="@+id/title"
@@ -18,7 +17,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        android:paddingHorizontal="16dp"
+        />
 
     <!-- Pokémon Spinner (mock list for now) -->
     <Spinner
@@ -40,7 +41,9 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/spinner_pokemon"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="16dp"
+        />
 
     <EditText
         android:id="@+id/level_input"
@@ -53,7 +56,8 @@
         android:inputType="number"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:padding="12dp"/> <!-- Padding for the input field -->
+        android:paddingHorizontal="16dp"
+        /> <!-- Padding for the input field -->
 
     <!-- Location Input (Autofilled with GPS) -->
     <TextView
@@ -64,7 +68,9 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/level_input"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="16dp"
+        />
 
     <TextView
         android:id="@+id/location_text"
@@ -77,20 +83,22 @@
         android:textSize="16sp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/selectableItemBackground"
-        android:padding="12dp"/> <!-- Padding inside the location field -->
+        android:paddingHorizontal="16dp"
+        /> <!-- Padding inside the location field -->
 
     <!-- Submit Button -->
     <Button
         android:id="@+id/submit_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/location_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="330dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:paddingHorizontal="16dp"
         android:text="Submit"
         android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        android:padding="12dp"/> <!-- Padding inside the button -->
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/location_text" /> <!-- Padding inside the button -->
 
     <!-- Bottom Navigation Bar (Stick to the bottom) -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
