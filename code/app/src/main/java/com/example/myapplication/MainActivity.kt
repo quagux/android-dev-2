@@ -112,7 +112,8 @@ class MainActivity : AppCompatActivity() {
         for (pokemon in jsonObject.results){
             fetchPokemonSprite(pokemon.url) { spriteUrl, speciesUrl ->
                 fetchPokemonFlavorText(speciesUrl) { flavorText ->
-                    val pokemonObject = Pokemon(pokemon.name, spriteUrl, flavorText)
+                    val pokemonName = pokemon.name.replaceFirstChar { it.uppercase() }
+                    val pokemonObject = Pokemon(pokemonName, spriteUrl, flavorText)
                     pokemonList.add(pokemonObject)
                     // Decrement the counter and check if all requests are done
                     pendingRequests--

@@ -9,15 +9,15 @@
     <!-- Search EditText -->
     <EditText
         android:id="@+id/searchEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="341dp"
+        android:layout_height="49dp"
         android:hint="Search by level or name"
+        android:inputType="text"
         android:padding="8dp"
         android:paddingHorizontal="16dp"
-        android:inputType="text"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
