@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -16,6 +17,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import java.util.Locale
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 
 class CollectionActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -23,12 +27,14 @@ class CollectionActivity : AppCompatActivity() {
     private var documentList: MutableList<DocumentModel>? = null
     private var firestore: FirebaseFirestore? = null
     private lateinit var searchEditText: EditText
+    private lateinit var generateStringButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_collection)
         recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         searchEditText = findViewById<EditText>(R.id.searchEditText)
+        generateStringButton = findViewById<Button>(R.id.generate_string_button)
         documentList = ArrayList()
         adapter = DocumentAdapter(
             this,
@@ -71,11 +77,30 @@ class CollectionActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {}
         })
 
+        generateStringButton.setOnClickListener{
+            val generatedString = StringBuilder()
+            for (document in documentList!!) {
+                generatedString.append(document.name).append(",")
+            }
+            generatedString.dropLast(1)
+
+            // Access the ClipboardManager
+            val clipboardManager = it.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+            // Create ClipData with the generated string
+            val clip = ClipData.newPlainText("Generated String", generatedString)
+
+            // Copy the ClipData to the clipboard
+            clipboardManager.setPrimaryClip(clip)
+
+            // Optional: Provide feedback to the user
+            Toast.makeText(it.context, "Copied to clipboard!", Toast.LENGTH_SHORT).show()
+        }
 
 
         // Reference to the BottomNavigationView
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.selectedItemId = R.id.nav_input_form
+        bottomNavigationView.selectedItemId = R.id.nav_collection
 
         // Set up navigation logic
         bottomNavigationView.setOnItemSelectedListener { menuItem ->

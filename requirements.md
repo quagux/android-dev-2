@@ -10,7 +10,7 @@
    - **Secondary Features**: Include at least 3 additional features that enhance the app (e.g., notifications, social sharing, customizable settings).
         1. Integration with GPS for logging when inputting Pokémon.
         2. Pokemon detail page.
-        3. NA
+        3. Generate collection search string
         
 2. **Firebase Integration**:
    - Use **Firebase** for at least one key functionality:
