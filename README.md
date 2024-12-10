@@ -142,4 +142,5 @@ Pokémon GO PC Manager is a desktop companion app that syncs with the Pokémon G
 ## App Demo Video  
 
 Embed the YouTube/Vimeo link of your completed demo video here.  
-![Final]((final.gif)https://www.youtube.com/watch?v=qQg4bqOzPuw)
+https://www.youtube.com/watch?v=qQg4bqOzPuw)
+![Final](final.gif)
